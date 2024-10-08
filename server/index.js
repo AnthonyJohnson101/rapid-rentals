@@ -17,20 +17,20 @@ app.use(express.json());
 const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
-const express = require('express')
-const app = express()
-const bodyParser = require("body-parser")
-const cors = require('cors')
-require('dotenv').config()
+const express = require('express');
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require('cors');
+require('dotenv').config();
 
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, "public")))
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
-app.use(cors())
 
 db.once('open', () => {
   app.listen(process.env.PORT || 3000, () => {
-  console.log(`server is listening on port 3000`)
-  })
+    console.log(`Server is listening on port ${process.env.PORT || 3000}`);
+  });
 });
