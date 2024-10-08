@@ -13,8 +13,7 @@ router.use((req, res) => {
     res.status(404).json({ message: 'Wrong route!' });
 });
 
-// Optional: Add a centralized error handling middleware
-// This should be added after all routes
+//centralized error handling middleware
 router.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack for debugging
     res.status(500).json({ message: 'Internal server error' });
