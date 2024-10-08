@@ -1,18 +1,28 @@
-/* const express = require('express');
-
-
-
-const PORT = process.env.PORT || 3001;
+/* const path = require('path');
+const db = require('./config/connection');
+const routes = require('./routes');
+const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+const cors = require('cors');
+require('dotenv').config();
 
-// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
+app.use(routes);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+db.once('open', () => {
+  app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server is listening on port ${process.env.PORT || 3000}`);
+  });
+});
 
-
-
- */
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+}); */
 
 const path = require('path');
 const db = require('./config/connection');
@@ -26,8 +36,15 @@ require('dotenv').config();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-/* app.use(express.static(path.join(__dirname, "public"))); */
 app.use(routes);
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+//handle wildcard
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 db.once('open', () => {
   app.listen(process.env.PORT || 3000, () => {
@@ -35,6 +52,7 @@ db.once('open', () => {
   });
 });
 
+// Error-handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
