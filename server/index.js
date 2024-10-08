@@ -13,6 +13,8 @@ app.use(express.json());
 
 
  */
+
+const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
 const express = require('express')
