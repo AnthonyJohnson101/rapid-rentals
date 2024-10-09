@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const apiRoutes = require('..routes/api');
+const apiRoutes = require('/api');
 const book = require('../controllers/bookingController');
 
 // Define the booking route
