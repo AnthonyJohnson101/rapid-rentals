@@ -39,11 +39,11 @@ app.use(bodyParser.json());
 app.use(routes);
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 //handle wildcard
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 db.once('open', () => {
