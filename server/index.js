@@ -38,13 +38,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(routes);
 
-/* // Serve static files
+// Serve static files
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 //handle wildcard
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-}); */
+});
 
 db.once('open', () => {
   app.listen(process.env.PORT || 3000, () => {
