@@ -5,11 +5,6 @@ const book = require('../controllers/bookingController');
 // Define the booking route
 router.route('/booking').post(book.BookingController);
 
-//TEST
-router.get('/', (req, res) => {
-    res.send('Welcome to Rapid Rentals!');
-  });
-
 // Use the API routes under the /api path
 router.use('/api', apiRoutes);
 
