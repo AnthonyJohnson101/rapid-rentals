@@ -43,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 //handle wildcard
 app.get('*', (req, res) => {
+  console.log(`Wildcard route hit: ${req.path}`);
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
