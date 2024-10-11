@@ -4,11 +4,11 @@
   "description": "rapid-rentals canoe rental",
   "main": "server/index.js",
   "scripts": {
-    "start": "concurrently \"node server/index.js\" \"cd client && npm run build\"",
+    "start": "node server/index.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "build": ""
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
